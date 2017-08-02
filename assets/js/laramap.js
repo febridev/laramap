@@ -11,12 +11,12 @@ $(document).ready(function(){
 	}
 
 	function success(position) {
-		console.log(position);
 		var latval = position.coords.latitude;
 		var lngval = position.coords.longitude;
 		myLatLng = new google.maps.LatLng(latval, lngval);
 		createMap(myLatLng);
-		nearbySearch(myLatLng,"restaurant")
+		// nearbySearch(myLatLng,"restaurant")
+		searchGirl(latval,lngval);
 	}
 
 	function fail() {
@@ -45,27 +45,41 @@ $(document).ready(function(){
 		});	
 	}
 
-	function nearbySearch(myLatLng, type) {
-		var request = {
-			location: myLatLng,
-	    	radius: '1500',
-	    	type: [type]
-		};
+	// function nearbySearch(myLatLng, type) {
+	// 	var request = {
+	// 		location: myLatLng,
+	//     	radius: '1500',
+	//     	type: [type]
+	// 	};
 
-		service = new google.maps.places.PlacesService(map);
-		service.nearbySearch(request, callback);
+	// 	service = new google.maps.places.PlacesService(map);
+	// 	service.nearbySearch(request, callback);
 
-		function callback(results, status) {
-			console.log(results);
-	  		if (status == google.maps.places.PlacesServiceStatus.OK) {
-		    for (var i = 0; i < results.length; i++) {
-		      var place = results[i];
-		      latlng = place.geometry.location;
-		      icn = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-		      name = place.name;
-		      createMarker(latlng, icn, name);
-		    }
-		  }
-		}
+	// 	function callback(results, status) {
+	// 		console.log(results);
+	//   		if (status == google.maps.places.PlacesServiceStatus.OK) {
+	// 	    for (var i = 0; i < results.length; i++) {
+	// 	      var place = results[i];
+	// 	      latlng = place.geometry.location;
+	// 	      icn = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+	// 	      name = place.name;
+	// 	      createMarker(latlng, icn, name);
+	// 	    }
+	// 	  }
+	// 	}
+	// }
+	
+	function searchGirl(lat,lng) {
+		$.post('http://laramap.dev:8080/api/searchGirls',{lat:lat,lng:lng},function(match) {
+			// console.log(match);
+			$.each(match,function(i,val) {
+				var glatval = val.lat;
+				var glngval = val.lng;
+				var gname = val.name;
+				var GlatLng = new google.maps.LatLng(glatval, glngval);
+				var Gicn = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+				createMarker(GlatLng,Gicn,gname);
+			}); 
+		});
 	}
 });
