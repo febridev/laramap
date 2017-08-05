@@ -77,7 +77,7 @@ $(document).ready(function(){
 				var glngval = val.lng;
 				var gname = val.name;
 				var GlatLng = new google.maps.LatLng(glatval, glngval);
-				var Gicn = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+				var Gicn = '../assets/icons/girl.png';
 				createMarker(GlatLng,Gicn,gname);
 			}); 
 		});

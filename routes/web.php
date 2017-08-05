@@ -1,5 +1,5 @@
 <?php
-
+use App\Location;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('guest');
+	$nn = Location::all();
+    return view('guest', compact('nn'));
 });
+
+

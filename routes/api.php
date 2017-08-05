@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/searchGirls','SearchGirlsController@searchGirls');
+Route::post('/searchCity','SearchGirlsController@searchCity');
