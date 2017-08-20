@@ -15,7 +15,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" role="form" method="post" action="" enctype="">
+				<form id="searchGirls" action="/getLocationCoords" role="form" method="post" enctype="">
 					<div class="form-group">
 						<label for="district">District</label>
 						<select name="district" id="district">
@@ -24,14 +24,14 @@
 							@endforeach
 						</select>
 					</div>
+					<div class="form-group">
+						<div id="city">
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Find</button>
+					</div>
 				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div id="city">
-					
-				</div>
 			</div>
 		</div>
 	</div>

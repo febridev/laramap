@@ -16,7 +16,7 @@ $(document).ready(function(){
 		myLatLng = new google.maps.LatLng(latval, lngval);
 		createMap(myLatLng);
 		// nearbySearch(myLatLng,"restaurant")
-		searchGirl(latval,lngval);
+		// searchGirl(latval,lngval);
 	}
 
 	function fail() {
@@ -82,4 +82,14 @@ $(document).ready(function(){
 			}); 
 		});
 	}
+
+	$('#searchGirls').submit(function(e){
+		e.preventDefault();
+		var distval = $('#district').val();
+		var cityval = $('#nmcity').val();
+		$.post('http://laramap.dev:8080/api/getLocationCoords',{distval:distval,cityval:cityval},function(match){
+			// console.log(match[0],match[1]);
+			searchGirl(match[0],match[1]);
+		});
+	});
 });

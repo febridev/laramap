@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('/searchGirls','SearchGirlsController@searchGirls');
 Route::post('/searchCity','SearchGirlsController@searchCity');
+Route::post('/getLocationCoords','SearchGirlsController@locationCoords');
+

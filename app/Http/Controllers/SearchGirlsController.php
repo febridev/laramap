@@ -12,8 +12,8 @@ class SearchGirlsController extends Controller
     {
     	$lat = $requets->lat;
     	$lng = $requets->lng;
-    	$girls = Girl::whereBetween('lat',[$lat-0.1,$lat+0.1])
-    				->whereBetween('lng',[$lng-0.1,$lng+0.1])
+    	$girls = Girl::where('lat',$lat)
+    				->where('lng',$lng)
     				->get();
     	return $girls;
     }
@@ -24,5 +24,18 @@ class SearchGirlsController extends Controller
     	$matchCity = Location::where('district',$distval)
     					->get();
     	return view('ajaxresults',compact('matchCity'));
+    }
+
+    public function locationCoords(Request $request)
+    {
+        $distval = $request->distval;
+        $cityval = $request->cityval;
+        $col = Location::where('district', $distval)
+                        ->where('city',$cityval)
+                        ->first();
+        $lat = $col->lat;
+        $lng = $col->lng;
+
+        return [$lat, $lng];
     }
 }
